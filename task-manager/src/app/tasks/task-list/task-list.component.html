@@ -1,0 +1,29 @@
+<div class="task-list">
+    <h1>Search Tasks</h1>
+    <div class="input-group search-bar">
+      <input type="text" #query class="sinput form-control"
+             id="searchField"
+             (keyup.enter)="findTasks(query.value)"
+             [formControl]="searchTerm">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button"
+                (click)="findTasks(query.value)">
+          Search
+        </button>
+      </span>
+    </div>
+  
+    <div class="user-item">
+      <app-task-item *ngFor="let task of tasks$ | async"
+                 [task]="task"
+                 (taskDelete)="deleteTask(task)"
+                 (taskSelected)="selectTask($event)"
+                 [selected]="task.id == selectedTaskId">
+      </app-task-item>
+    </div>
+    <br>
+    <a routerLink='./new' class="pull-right btn btn-success">
+      New Task
+    </a>
+  </div>
+  
